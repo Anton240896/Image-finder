@@ -5,13 +5,14 @@ import {
   SearchFormButton,
   SearchFormButtonLabel,
   SearchFormInput,
+  SearchBar,
 } from './SearchBar.styled';
 
 const Schema = Yup.object().shape({
   query: Yup.string().min(1).max(50).required('Enter your request!'),
 });
 
-export const SearchBar = ({ onSubmit }) => (
+export const SearchBarContainer = ({ onSubmit }) => (
   <SearchBar>
     <Formik
       initialValues={{

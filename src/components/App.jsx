@@ -9,7 +9,7 @@ import { Button } from './Button/Button';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Loader } from './Loader/Loader';
 // import { Modal } from './Modal/modal';
-import { SearchBar } from './Searchbar/SearchBar';
+import { SearchBarContainer } from './Searchbar/SearchBar';
 
 //      /*======== STATE =========*/
 
@@ -98,7 +98,7 @@ export class App extends Component {
 
     return (
       <AppWrapper>
-        <SearchBar onSubmit={HTTP_REQUEST} />
+        <SearchBarContainer onSubmit={HTTP_REQUEST} />
         <ImageGallery images={images} />
         {loading ? <Loader /> : <ImageGallery images={images} />}
 
