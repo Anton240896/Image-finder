@@ -1,9 +1,10 @@
-import { Formik, ErrorMessage } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { RiSearchLine } from 'react-icons/ri';
+
 import {
   SearchForm,
   SearchFormButton,
-  SearchFormButtonLabel,
   SearchFormInput,
   SearchBar,
 } from './SearchBar.styled';
@@ -28,15 +29,14 @@ export const SearchBarContainer = ({ onSubmit }) => (
 
     <SearchForm>
       <SearchFormButton type="submit">
-        <SearchFormButtonLabel>Search</SearchFormButtonLabel>
+        <RiSearchLine />
       </SearchFormButton>
 
       <SearchFormInput
         type="text"
         name="query"
-        placeholder="Search images and photos"
+        placeholder="Search images and photos..."
       />
-      <ErrorMessage name="searchQuery" />
     </SearchForm>
   </SearchBar>
 );

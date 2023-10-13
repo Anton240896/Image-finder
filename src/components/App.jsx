@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 
 import toast, { Toaster } from 'react-hot-toast';
-// import { SearchQuery } from './api';
-import axios from 'axios';
+import { fetchRequestApi } from './Api/Api';
 
 import { AppWrapper } from './Layout';
 import { Button } from './Button/Button';
@@ -18,24 +17,15 @@ export class App extends Component {
     query: '',
     page: 1,
     images: [],
+    counter: 0,
     loading: false,
     error: false,
   };
   //   /*======= QUERY SEARCHBAR ========*/
 
   handleSubmit = query => {
-    query.preventDefault();
-    const trimQuery = query.trim();
-
-    if (trimQuery === '') {
-      toast.error('Please enter a search query!');
-      return;
-    }
-
-    //   /*======== UPDATE QUERY ========*/
-
     this.setState({
-      query: trimQuery,
+      query: query,
       page: 1,
       images: [],
     });
@@ -48,61 +38,49 @@ export class App extends Component {
 
   //   /*======== HTTP REQUEST =========*/
 
-  async componentDidMount() {
-    const URL_API = 'https://pixabay.com/api/';
-    const KEY_API = '39074822-7a439c7ecb254f2e87bade55b';
-
-    const params = new URLSearchParams({
-      key: KEY_API,
-      // q: query,
-      image_type: 'photo',
-      orientation: 'horizontal',
-      page: 1,
-      per_page: 27,
-    });
-
-    this.setState({ loading: false });
-
-    try {
-      // console.log('Base URL:', axios.defaults.baseURL);
-      const response = await axios.get(`${URL_API}?${params}`);
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching data: ', error);
-      this.Setstate({ error: true });
-      toast.error(
-        'Sorry, no images were found for your search, please try again.!'
-      );
-    } finally {
-      this.Setstate({ loading: false });
-    }
-  }
-
-  //   /*======== CONPONENT DID UPDATE ========*/
-
-  componentDidUpdate(prevProps, prevState) {
+  async componentDidUpdate(prevProps, prevState) {
     const stateQuery = this.state.query;
     const statePage = this.state.page;
     const prevStateQuery = prevState.query;
     const prevStatePage = prevState.page;
+    const { page, query } = this.state;
 
     if (prevStateQuery !== stateQuery || prevStatePage !== statePage) {
+      try {
+        this.setState({ loading: true, error: false });
+        const responseData = await fetchRequestApi(page, query);
+        toast.success('✅ Yes! We found images.');
+        this.setState(prevState => ({
+          images: [...prevState.images, ...responseData.hits],
+          counter: responseData.counter,
+        }));
+      } catch (error) {
+        console.log('Error:', error);
+        this.setState({ error: true });
+        toast.error('❌ No! Sorry, no images found, please try again!');
+      } finally {
+        this.setState({ loading: false });
+      }
     }
   }
   //   /*======== RENDER ========*/
 
   render() {
-    const { images, loading } = this.state;
+    const { images, loading, error, counter } = this.state;
     const HTTP_REQUEST = this.componentDidUpdate;
     const LoadMoreButton = this.handleLoadMore;
 
     return (
       <AppWrapper>
         <SearchBarContainer onSubmit={HTTP_REQUEST} />
-        <ImageGallery images={images} />
-        {loading ? <Loader /> : <ImageGallery images={images} />}
+        {loading ?? <Loader />}
 
-        <Button onClick={LoadMoreButton} />
+        <ImageGallery images={images} />
+
+        {images.length > 0 && images.length < counter && !loading && !error && (
+          <Button onClick={LoadMoreButton} />
+        )}
+
         {<Toaster position="top-right" />}
       </AppWrapper>
     );
