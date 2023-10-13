@@ -92,7 +92,7 @@ export class App extends Component {
   //   /*======== RENDER ========*/
 
   render() {
-    const { images, loading, error } = this.state;
+    const { images, loading } = this.state;
     const HTTP_REQUEST = this.componentDidUpdate;
     const LoadMoreButton = this.handleLoadMore;
 
