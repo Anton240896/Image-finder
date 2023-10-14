@@ -1,8 +1,13 @@
 import styled from 'styled-components';
 
-export const ItemGallery = styled.img`
-  width: 100%;
-  height: 260px;
-  object-fit: cover;
-  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+export const ImageWraper = styled.div`
+  border-radius: 8px;
+  border: 1px solid #000000;
+  overflow: hidden;
+  transition: box-shadow 250ms, transform 250ms;
+  &:hover,
+  :focus {
+    box-shadow: 1px 1px 20px black;
+    transform: scale(1.04);
+  }
 `;

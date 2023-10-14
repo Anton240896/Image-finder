@@ -1,4 +1,4 @@
-import { Formik } from 'formik';
+import { Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { RiSearchLine } from 'react-icons/ri';
 
@@ -7,6 +7,7 @@ import {
   SearchFormButton,
   SearchFormInput,
   SearchBar,
+  ErrorMessageWrapper
 } from './SearchBar.styled';
 
 const Schema = Yup.object().shape({
@@ -36,6 +37,7 @@ export const SearchBarContainer = ({ onSubmit }) => (
           name="query"
           placeholder="Search images and photos..."
         />
+        <ErrorMessage name="searchQuery" component={ErrorMessageWrapper} />
       </SearchForm>
     </Formik>
   </SearchBar>

@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 
-import toast, { Toaster } from 'react-hot-toast';
 import { fetchRequestApi } from './Api/Api';
+import toast, { Toaster } from 'react-hot-toast';
 
 import { AppWrapper } from './Layout';
 import { Button } from './Button/Button';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Loader } from './Loader/Loader';
-// import { Modal } from './Modal/modal';
 import { SearchBarContainer } from './Searchbar/SearchBar';
 
 //      /*======== STATE =========*/
@@ -67,19 +66,29 @@ export class App extends Component {
   //   /*======== RENDER ========*/
 
   render() {
-    const { images, loading, error, counter } = this.state;
+    const { query, images, loading, error, counter } = this.state;
     const HTTP_REQUEST = this.componentDidUpdate;
     const LoadMoreButton = this.handleLoadMore;
 
     return (
       <AppWrapper>
-        <SearchBarContainer onSubmit={HTTP_REQUEST} />
-        {loading && <Loader />}
-        <ImageGallery images={images} />
-        {images.length > 0 && images.length < counter && !loading && !error && (
-          <Button onClick={LoadMoreButton}>Load more</Button>
-        )}
         <Toaster position="top-right" />
+        <SearchBarContainer onSubmit={HTTP_REQUEST} />
+
+        {images.length ? (
+          <Button onLoadMore={LoadMoreButton} />
+        ) : (
+          toast.error('❌ No! Sorry, no images found, please try again!')
+        )}
+
+        {loading && <Loader />}
+        {error &&
+          toast.error('❌ No! Sorry, no images found, please try again!')}
+        {images.length > 0 ? (
+          <ImageGallery images={images} />
+        ) : (
+          toast.error('❌ No! Sorry, no images found, please try again!')
+        )}
       </AppWrapper>
     );
   }

@@ -63,3 +63,10 @@ export const SearchFormInput = styled.input`
   padding-left: 20%;
   padding-right: 4px;
 `;
+
+export const ErrorMessageWrapper = styled.div`
+  font: inherit;
+  font-size: 18px;
+  color: red;
+  width: 280px;
+`;
