@@ -21,6 +21,7 @@ export class App extends Component {
     loading: false,
     error: false,
   };
+
   //   /*======= QUERY SEARCHBAR ========*/
 
   handleSubmit = query => {
@@ -73,15 +74,12 @@ export class App extends Component {
     return (
       <AppWrapper>
         <SearchBarContainer onSubmit={HTTP_REQUEST} />
-        {loading ?? <Loader />}
-
+        {loading && <Loader />}
         <ImageGallery images={images} />
-
         {images.length > 0 && images.length < counter && !loading && !error && (
-          <Button onClick={LoadMoreButton} />
+          <Button onClick={LoadMoreButton}>Load more</Button>
         )}
-
-        {<Toaster position="top-right" />}
+        <Toaster position="top-right" />
       </AppWrapper>
     );
   }
