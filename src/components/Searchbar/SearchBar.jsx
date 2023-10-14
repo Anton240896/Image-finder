@@ -25,18 +25,18 @@ export const SearchBarContainer = ({ onSubmit }) => (
         onSubmit(values.query);
         actions.resetForm();
       }}
-    ></Formik>
+    >
+      <SearchForm>
+        <SearchFormButton type="submit">
+          <RiSearchLine />
+        </SearchFormButton>
 
-    <SearchForm>
-      <SearchFormButton type="submit">
-        <RiSearchLine />
-      </SearchFormButton>
-
-      <SearchFormInput
-        type="text"
-        name="query"
-        placeholder="Search images and photos..."
-      />
-    </SearchForm>
+        <SearchFormInput
+          type="text"
+          name="query"
+          placeholder="Search images and photos..."
+        />
+      </SearchForm>
+    </Formik>
   </SearchBar>
 );
