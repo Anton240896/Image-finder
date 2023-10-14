@@ -76,7 +76,7 @@ export class App extends Component {
         <SearchBarContainer onSubmit={HTTP_REQUEST} />
 
         {loading && <Loader />}
-        <ImageGallery images={this.state.images} />
+        <ImageGallery images={images} />
 
         {images.length > 0 && images.length < counter && !loading && !error && (
           <Button onClick={LoadMoreButton}>Load more</Button>
