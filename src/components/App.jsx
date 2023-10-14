@@ -78,9 +78,12 @@ export class App extends Component {
         {loading && <Loader />}
         <ImageGallery images={images} />
 
-        {images.length > 0 && images.length < counter && !loading && !error && (
-          <Button onClick={LoadMoreButton}>Load more</Button>
-        )}
+        {images.length > 0 &&
+          images.length < counter &&
+          loading === false &&
+          error === false && (
+            <Button onClick={LoadMoreButton}>Load more</Button>
+          )}
       </AppWrapper>
     );
   }
