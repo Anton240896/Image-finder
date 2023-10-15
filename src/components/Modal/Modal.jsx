@@ -1,6 +1,6 @@
-import ReactModal from 'react-modal';
+import Modal from 'react-modal';
 
-const customStyles = {
+const stylesModal = {
   content: {
     top: '50%',
     right: 'auto',
@@ -9,22 +9,24 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
   },
-  overlay: {
-    backgroundColor: 'rgba(41, 14, 14, 0.8)',
-  },
 };
 
-ReactModal.setAppElement('#root');
+Modal.setAppElement('#root');
 
-export const ModalWindow = ({ isOpen, onCloseModal, largeImageURL, tags }) => {
+export const ModalWindow = ({
+  isOpenModal,
+  onCloseModal,
+  largeImageURL,
+  tags,
+}) => {
   return (
-    <ReactModal
-      isOpen={isOpen}
+    <Modal
+      isOpen={isOpenModal}
       onRequestClose={onCloseModal}
-      style={customStyles}
+      style={stylesModal}
       contentLabel="Image Modal"
     >
       <img src={largeImageURL} alt={tags} />
-    </ReactModal>
+    </Modal>
   );
 };

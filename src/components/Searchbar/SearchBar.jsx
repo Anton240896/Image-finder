@@ -7,7 +7,7 @@ import {
   SearchFormButton,
   SearchFormInput,
   SearchBar,
-  ErrorMessageWrapper
+  ErrorMessageWrapper,
 } from './SearchBar.styled';
 
 const Schema = Yup.object().shape({
@@ -27,18 +27,21 @@ export const SearchBarContainer = ({ onSubmit }) => (
         actions.resetForm();
       }}
     >
-      <SearchForm>
-        <SearchFormButton type="submit">
-          <RiSearchLine />
-        </SearchFormButton>
+      {({ handleSubmit, handleChange }) => (
+        <SearchForm onSubmit={handleSubmit}>
+          <SearchFormButton type="submit">
+            <RiSearchLine />
+          </SearchFormButton>
 
-        <SearchFormInput
-          type="text"
-          name="query"
-          placeholder="Search images and photos..."
-        />
-        <ErrorMessage name="searchQuery" component={ErrorMessageWrapper} />
-      </SearchForm>
+          <SearchFormInput
+            type="text"
+            name="query"
+            placeholder="Search images and photos..."
+            onChange={handleChange}
+          />
+          <ErrorMessage name="searchQuery" component={ErrorMessageWrapper} />
+        </SearchForm>
+      )}
     </Formik>
   </SearchBar>
 );

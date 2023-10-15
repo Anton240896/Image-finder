@@ -1,8 +1,8 @@
 import React from 'react';
-import { ModalWindow } from 'components/Modal/Modal';
 import { ImageWraper } from './ImageGalleryItem.styled';
+import { ModalWindow } from 'components/Modal/Modal';
 
-export class ItemGalleryImage extends React.Component {
+export class ImageGalleryItem extends React.Component {
   state = {
     isModalOpen: false,
   };
@@ -22,12 +22,11 @@ export class ItemGalleryImage extends React.Component {
   render() {
     const { webformatURL, largeImageURL, tags } = this.props;
     const { isModalOpen } = this.state;
-    const openModal = this.openModal;
-    const closeModal = this.closeModal;
+
     return (
       <ImageWraper>
         <img
-          onClick={openModal}
+          onClick={this.openModal}
           src={webformatURL}
           alt={tags}
           loading="lazy"
@@ -37,7 +36,7 @@ export class ItemGalleryImage extends React.Component {
         <ModalWindow
           largeImageURL={largeImageURL}
           isOpenModalOpen={isModalOpen}
-          onCloseModal={closeModal}
+          onCloseModal={this.closeModal}
           tags={tags}
         />
       </ImageWraper>

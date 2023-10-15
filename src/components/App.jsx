@@ -16,7 +16,7 @@ export class App extends Component {
     query: '',
     page: 1,
     images: [],
-    counter: 0,
+    totalHits: 0,
     loading: false,
     error: false,
   };
@@ -49,15 +49,15 @@ export class App extends Component {
       try {
         this.setState({ loading: true, error: false });
         const responseData = await fetchRequestApi(page, query);
-        toast.success('✅ Yes! We found images.');
+        toast.success(' Yes! We found images.');
         this.setState(prevState => ({
           images: [...prevState.images, ...responseData.hits],
           counter: responseData.counter,
         }));
       } catch (error) {
-        console.log('Error:', error);
         this.setState({ error: true });
-        toast.error('❌ No! Sorry, no images found, please try again!');
+        toast.error(' No! Sorry, no images found, please try again!');
+        console.log('Error:', error);
       } finally {
         this.setState({ loading: false });
       }
@@ -66,24 +66,20 @@ export class App extends Component {
   //   /*======== RENDER ========*/
 
   render() {
-    const { images, loading, error, counter } = this.state;
-    const HTTP_REQUEST = this.componentDidUpdate;
-    const LoadMoreButton = this.handleLoadMore;
+    const { images, loading, error, totalHits } = this.state;
 
     return (
       <AppWrapper>
-        <Toaster position="top-right" />
-        <SearchBarContainer onSubmit={HTTP_REQUEST} />
-
         {loading && <Loader />}
+        <Toaster position="top-right" />
+        <SearchBarContainer onSubmit={this.handleSubmit} />
+
         <ImageGallery images={images} />
 
         {images.length > 0 &&
-          images.length < counter &&
-          loading === false &&
-          error === false && (
-            <Button onClick={LoadMoreButton}>Load more</Button>
-          )}
+          images.length < totalHits &&
+          !loading &&
+          !error && <Button onClick={this.handleLoadMore}>Load more</Button>}
       </AppWrapper>
     );
   }
