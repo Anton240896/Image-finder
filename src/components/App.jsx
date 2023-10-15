@@ -66,7 +66,7 @@ export class App extends Component {
   //   /*======== RENDER ========*/
 
   render() {
-    const { query, images, loading, error, totalHits } = this.state;
+    const { query, images, loading, error } = this.state;
 
     return (
       <AppWrapper>
@@ -74,17 +74,10 @@ export class App extends Component {
         {loading && <Loader />}
         {error && toast.error(' No! Sorry, no images found, please try again!')}
 
-        {query !== '' &&
-          loading === false &&
-          error === false &&
-          images.length === 0}
+        {images.length > 0 && <ImageGallery images={images} />}
 
-        <ImageGallery images={images} />
         <Button onLoadMore={this.handleLoadMore}>Load more</Button>
-        {/* {images.length > 0 &&
-          images.length < totalHits &&
-          !loading &&
-        !error && */}
+
         <Toaster position="top-right" />
       </AppWrapper>
     );
