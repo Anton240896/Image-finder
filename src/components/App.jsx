@@ -48,8 +48,8 @@ export class App extends Component {
     if (prevStateQuery !== stateQuery || prevStatePage !== statePage) {
       try {
         this.setState({ loading: true, error: false });
-        const responseData = await fetchRequestApi(page, query);
         toast.success(' Yes! We found images.');
+        const responseData = await fetchRequestApi(page, query);
         this.setState(prevState => ({
           images: [...prevState.images, ...responseData.hits],
           counter: responseData.counter,
@@ -79,7 +79,7 @@ export class App extends Component {
         {images.length > 0 &&
           images.length < totalHits &&
           !loading &&
-          !error && <Button onClick={this.handleLoadMore}>Load more</Button>}
+          !error && <Button onLoadMore={this.handleLoadMore}>Load more</Button>}
       </AppWrapper>
     );
   }
