@@ -60,7 +60,7 @@ export const SearchFormInput = styled.input`
   font-size: 20px;
   border: none;
   outline: none;
-  padding-left: 20%;
+  padding-left: 44px;
   padding-right: 4px;
 `;
 
