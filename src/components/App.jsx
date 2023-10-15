@@ -48,7 +48,7 @@ export class App extends Component {
     if (prevStateQuery !== stateQuery || prevStatePage !== statePage) {
       try {
         this.setState({ loading: true, error: false });
-        // toast.success(' Yes! We found images.');
+        toast.success(' Yes! We found images.');
         const responseData = await fetchRequestApi(page, query);
         this.setState(prevState => ({
           images: [...prevState.images, ...responseData.hits],
@@ -70,10 +70,9 @@ export class App extends Component {
 
     return (
       <AppWrapper>
-        <Toaster position="top-right" />
-
         <SearchBarContainer onSubmit={this.handleSubmit} />
         {loading && <Loader />}
+        {error && toast.error(' No! Sorry, no images found, please try again!')}
 
         {query !== '' &&
           loading === false &&
@@ -85,7 +84,8 @@ export class App extends Component {
         {/* {images.length > 0 &&
           images.length < totalHits &&
           !loading &&
-          !error && */}
+        !error && */}
+        <Toaster position="top-right" />
       </AppWrapper>
     );
   }
