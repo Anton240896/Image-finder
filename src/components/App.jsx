@@ -66,7 +66,7 @@ export class App extends Component {
   //   /*======== RENDER ========*/
 
   render() {
-    const { query, images, loading, error } = this.state;
+    const { images, loading, error } = this.state;
 
     return (
       <AppWrapper>
