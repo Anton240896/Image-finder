@@ -33,7 +33,7 @@ export class App extends Component {
   //   /*=========== LOAD-MORE BUTTON + 1 PAGE =============*/
 
   handleLoadMore = () => {
-    this.setState(prevState => ({ page: prevState + 1 }));
+    this.setState(prevState => ({ page: prevState.page + 1 }));
   };
 
   //   /*======== HTTP REQUEST =========*/
@@ -48,7 +48,7 @@ export class App extends Component {
     if (prevStateQuery !== stateQuery || prevStatePage !== statePage) {
       try {
         this.setState({ loading: true, error: false });
-        toast.success(' Yes! We found images.');
+        // toast.success(' Yes! We found images.');
         const responseData = await fetchRequestApi(page, query);
         this.setState(prevState => ({
           images: [...prevState.images, ...responseData.hits],
@@ -66,20 +66,26 @@ export class App extends Component {
   //   /*======== RENDER ========*/
 
   render() {
-    const { images, loading, error, totalHits } = this.state;
+    const { query, images, loading, error, totalHits } = this.state;
 
     return (
       <AppWrapper>
-        {loading && <Loader />}
         <Toaster position="top-right" />
+
         <SearchBarContainer onSubmit={this.handleSubmit} />
+        {loading && <Loader />}
+
+        {query !== '' &&
+          loading === false &&
+          error === false &&
+          images.length === 0}
 
         <ImageGallery images={images} />
-
-        {images.length > 0 &&
+        <Button onLoadMore={this.handleLoadMore}>Load more</Button>
+        {/* {images.length > 0 &&
           images.length < totalHits &&
           !loading &&
-          !error && <Button onLoadMore={this.handleLoadMore}>Load more</Button>}
+          !error && */}
       </AppWrapper>
     );
   }
