@@ -52,7 +52,7 @@ export class App extends Component {
           toast.error(' 🥺! Sorry, no images found, please try again!');
         }
 
-        if (responseData.hits.length > 0) {
+        if (responseData.hits.length !== 0) {
           toast.success('😊! We found images');
         }
         this.setState(prevState => ({
@@ -63,6 +63,7 @@ export class App extends Component {
         this.setState({
           error: toast.error(' No! Sorry, no images found, please try again!'),
         });
+
         // toast.error(' No! Sorry, no images found, please try again!');
       } finally {
         this.setState({ loading: false });
