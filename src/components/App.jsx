@@ -60,9 +60,7 @@ export class App extends Component {
           showBtn: page < Math.ceil(responseData.totalHits / 12),
         }));
       } catch (error) {
-        this.setState({
-          error: toast.error(' No! Sorry, no images found, please try again!'),
-        });
+        this.setState({ error: true });
 
         // toast.error(' No! Sorry, no images found, please try again!');
       } finally {
