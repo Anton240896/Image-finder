@@ -26,7 +26,7 @@ export const ModalWindow = ({
       style={stylesModal}
       contentLabel="Image Modal"
     >
-      <img src={largeImageURL} alt={tags} />
+      <img src={largeImageURL} alt={tags} width="700px" height="500px" />
     </Modal>
   );
 };
