@@ -54,9 +54,10 @@ export class App extends Component {
         }));
         toast.success(' Yes! We found images.');
       } catch (error) {
-        this.setState({ error: true });
-        toast.error(' No! Sorry, no images found, please try again!');
-        console.log('Error:', error);
+        this.setState({
+          error: toast.error(' No! Sorry, no images found, please try again!'),
+        });
+        // toast.error(' No! Sorry, no images found, please try again!');
       } finally {
         this.setState({ loading: false });
       }
