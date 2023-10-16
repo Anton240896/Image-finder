@@ -7,7 +7,7 @@ const stylesModal = {
     bottom: 'auto',
     left: '50%',
     marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
+    transform: 'translate(-50%, -44%)',
   },
 };
 
