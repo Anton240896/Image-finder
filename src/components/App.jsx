@@ -61,8 +61,6 @@ export class App extends Component {
         }));
       } catch (error) {
         this.setState({ error: true });
-
-        // toast.error(' No! Sorry, no images found, please try again!');
       } finally {
         this.setState({ loading: false });
       }
