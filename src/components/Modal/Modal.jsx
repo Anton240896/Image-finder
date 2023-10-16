@@ -8,7 +8,8 @@ const stylesModal = {
     left: '50%',
     marginRight: '-50%',
     transform: 'translate(-50%, -43%)',
-    backgroundColor: 'black',
+    backgroundImage:
+      'radial-gradient(circle, #010102 70%, rgb(13, 27, 77) 80%)',
   },
 };
 
