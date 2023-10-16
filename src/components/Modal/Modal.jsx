@@ -7,7 +7,7 @@ const stylesModal = {
     bottom: 'auto',
     left: '50%',
     marginRight: '-50%',
-    transform: 'translate(-50%, -44%)',
+    transform: 'translate(-50%, -43%)',
     backgroundColor: 'black',
   },
 };
@@ -27,7 +27,7 @@ export const ModalWindow = ({
       style={stylesModal}
       contentLabel="Image Modal"
     >
-      <img src={largeImageURL} alt={tags} width="700px" height="500px" />
+      <img src={largeImageURL} alt={tags} width="700px" height="530px" />
     </ReactModal>
   );
 };
