@@ -45,14 +45,20 @@ export class App extends Component {
     const { page, query } = this.state;
 
     if (prevStateQuery !== query || prevStatePage !== page) {
+      this.setState({ loading: true, error: false });
+      const responseData = await fetchRequestApi(page, query);
       try {
-        this.setState({ loading: true, error: false });
-        const responseData = await fetchRequestApi(page, query);
+        if (responseData.hits.length === 0) {
+          toast.error(' No! Sorry, no images found, please try again!');
+        }
+
+        if (responseData.hits.length > 0) {
+          toast.success('Yes, we found images');
+        }
         this.setState(prevState => ({
           images: [...prevState.images, ...responseData.hits],
           showBtn: page < Math.ceil(responseData.totalHits / 12),
         }));
-        toast.success(' Yes! We found images.');
       } catch (error) {
         this.setState({
           error: toast.error(' No! Sorry, no images found, please try again!'),
