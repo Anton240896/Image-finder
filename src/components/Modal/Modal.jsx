@@ -1,4 +1,4 @@
-import Modal from 'react-modal';
+import ReactModal from 'react-modal';
 
 const stylesModal = {
   content: {
@@ -11,7 +11,7 @@ const stylesModal = {
   },
 };
 
-Modal.setAppElement('#root');
+ReactModal.setAppElement('#root');
 
 export const ModalWindow = ({
   isOpenModal,
@@ -20,13 +20,13 @@ export const ModalWindow = ({
   tags,
 }) => {
   return (
-    <Modal
+    <ReactModal
       isOpen={isOpenModal}
       onRequestClose={onCloseModal}
       style={stylesModal}
       contentLabel="Image Modal"
     >
       <img src={largeImageURL} alt={tags} width="700px" height="500px" />
-    </Modal>
+    </ReactModal>
   );
 };
