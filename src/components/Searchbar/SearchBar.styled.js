@@ -44,11 +44,10 @@ export const SearchFormButton = styled.button`
 
   &:hover,
   &:focus {
-    background-color: rgb(222, 232, 115);
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-
+    background-image: radial-gradient(circle, #010102 20%, rgb(13, 27, 77) 50%);
+    transition: background-image 350ms cubic-bezier(0.4, 0, 0.2, 1);
     svg {
-      color: darkblue;
+      color: white;
     }
   }
 `;
@@ -69,4 +68,8 @@ export const ErrorMessageWrapper = styled.div`
   font-size: 18px;
   color: red;
   width: 280px;
+`;
+
+export const SearchLogo = styled.img`
+  margin-right: 50px;
 `;

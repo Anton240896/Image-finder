@@ -70,10 +70,24 @@ export class App extends Component {
     return (
       <AppWrapper>
         <SearchBarContainer onSubmit={this.handleSubmit} />
+
         {loading && <Loader />}
         {error && toast.error(' No! Sorry, no images found, please try again!')}
 
-        {images.length > 0 && <ImageGallery images={images} />}
+        {images.length > 0 ? (
+          <ImageGallery images={images} />
+        ) : (
+          <p
+            style={{
+              padding: 100,
+              color: 'darkblue',
+              textAlign: 'center',
+              fontSize: 60,
+            }}
+          >
+            No photos at the moment ... 🥺
+          </p>
+        )}
 
         {showBtn && <Button onLoadMore={this.handleLoadMore}>Load more</Button>}
 
