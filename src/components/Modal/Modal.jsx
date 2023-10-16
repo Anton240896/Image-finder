@@ -8,6 +8,7 @@ const stylesModal = {
     left: '50%',
     marginRight: '-50%',
     transform: 'translate(-50%, -44%)',
+    backgroundColor: 'black',
   },
 };
 
