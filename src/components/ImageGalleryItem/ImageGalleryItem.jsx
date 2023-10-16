@@ -35,7 +35,7 @@ export class ImageGalleryItem extends React.Component {
         />
         <ModalWindow
           largeImageURL={largeImageURL}
-          isOpenModalOpen={isModalOpen}
+          isOpenModal={isModalOpen}
           onCloseModal={this.closeModal}
           tags={tags}
         />

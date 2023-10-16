@@ -19,6 +19,7 @@ export class App extends Component {
     totalHits: 0,
     loading: false,
     error: false,
+    showBtn: false,
   };
 
   //   /*======= QUERY SEARCHBAR ========*/
@@ -39,21 +40,19 @@ export class App extends Component {
   //   /*======== HTTP REQUEST =========*/
 
   async componentDidUpdate(prevProps, prevState) {
-    const stateQuery = this.state.query;
-    const statePage = this.state.page;
     const prevStateQuery = prevState.query;
     const prevStatePage = prevState.page;
     const { page, query } = this.state;
 
-    if (prevStateQuery !== stateQuery || prevStatePage !== statePage) {
+    if (prevStateQuery !== query || prevStatePage !== page) {
       try {
         this.setState({ loading: true, error: false });
-        toast.success(' Yes! We found images.');
         const responseData = await fetchRequestApi(page, query);
         this.setState(prevState => ({
           images: [...prevState.images, ...responseData.hits],
-          counter: responseData.counter,
+          showBtn: page < Math.ceil(responseData.totalHits / 12),
         }));
+        toast.success(' Yes! We found images.');
       } catch (error) {
         this.setState({ error: true });
         toast.error(' No! Sorry, no images found, please try again!');
@@ -66,7 +65,7 @@ export class App extends Component {
   //   /*======== RENDER ========*/
 
   render() {
-    const { images, loading, error } = this.state;
+    const { images, loading, error, showBtn } = this.state;
 
     return (
       <AppWrapper>
@@ -76,7 +75,7 @@ export class App extends Component {
 
         {images.length > 0 && <ImageGallery images={images} />}
 
-        <Button onLoadMore={this.handleLoadMore}>Load more</Button>
+        {showBtn && <Button onLoadMore={this.handleLoadMore}>Load more</Button>}
 
         <Toaster position="top-right" />
       </AppWrapper>
