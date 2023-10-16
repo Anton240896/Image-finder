@@ -49,11 +49,11 @@ export class App extends Component {
       const responseData = await fetchRequestApi(page, query);
       try {
         if (responseData.hits.length === 0) {
-          toast.error(' No! Sorry, no images found, please try again!');
+          toast.error(' 🥺! Sorry, no images found, please try again!');
         }
 
         if (responseData.hits.length > 0) {
-          toast.success('Yes, we found images');
+          toast.success('😊! We found images');
         }
         this.setState(prevState => ({
           images: [...prevState.images, ...responseData.hits],
